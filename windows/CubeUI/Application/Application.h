@@ -5,6 +5,7 @@
 #include <mutex>
 #include <thread>
 
+#include "../Cube/Cube.h"
 #include "../XWindow/MainWindow.h"
 #include "../Event/EventManager.h"
 #include "../Task/TaskManager.h"
@@ -17,6 +18,7 @@ namespace NX {
 
 		Application();
 
+		Cube mCube;
 		MainWindow mWindow;
 		EventManager * mEventManager;
 		TaskManager * mTaskManager;
@@ -37,6 +39,10 @@ namespace NX {
 		EventManager * eventManager();
 		TaskManager * taskManager();
 		CommandManager * commandManager();
+
+		Cube & cube();
+		const Cube & cube() const;
+		Cube * cubePtr();
 
 		void init();
 		void mainloop(const int elapsedTime);

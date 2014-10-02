@@ -92,6 +92,9 @@
     <ClCompile Include="main.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Cube\Cube.cpp">
+      <Filter>Quelldateien\Cube</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\Application.h">
@@ -148,7 +151,10 @@
     <ClInclude Include="XWindow\MainWindow.h">
       <Filter>Quelldateien\XWindow</Filter>
     </ClInclude>
-    <ClInclude Include="Cube\CubeControll.h">
+    <ClInclude Include="Cube\Cube.h">
+      <Filter>Quelldateien\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube\CubeControl.h">
       <Filter>Quelldateien\Cube</Filter>
     </ClInclude>
   </ItemGroup>

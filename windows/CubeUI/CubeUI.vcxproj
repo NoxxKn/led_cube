@@ -75,6 +75,7 @@
   <ItemGroup>
     <ClCompile Include="Application\Application.cpp" />
     <ClCompile Include="Command\CommandManager.cpp" />
+    <ClCompile Include="Cube\Cube.cpp" />
     <ClCompile Include="Event\EventManager.cpp" />
     <ClCompile Include="Image\PNGImage.cpp" />
     <ClCompile Include="main.cpp" />
@@ -91,7 +92,8 @@
     <ClInclude Include="Application\Application.h" />
     <ClInclude Include="Command\CommandManager.h" />
     <ClInclude Include="Command\ICommand.h" />
-    <ClInclude Include="Cube\CubeControll.h" />
+    <ClInclude Include="Cube\Cube.h" />
+    <ClInclude Include="Cube\CubeControl.h" />
     <ClInclude Include="Event\EventManager.h" />
     <ClInclude Include="Event\IEvent.h" />
     <ClInclude Include="Image\IImage.h" />

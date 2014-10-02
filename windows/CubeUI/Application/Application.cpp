@@ -56,6 +56,18 @@ CommandManager * Application::commandManager() {
 	return mCommandManager;
 }
 
+Cube & Application::cube() {
+	return mCube;
+}
+
+const Cube & Application::cube() const {
+	return mCube;
+}
+
+Cube * Application::cubePtr() {
+	return &mCube;
+}
+
 void Application::init() {
 	regCommands();
 	mEventManager->add(new CreateMainViewEvent());
