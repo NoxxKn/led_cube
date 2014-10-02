@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Quelldateien">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Ressourcendateien">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Quelldateien\Application">
+      <UniqueIdentifier>{85c17cb1-f476-4c62-a446-ccc9b4a95453}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Command">
+      <UniqueIdentifier>{782a983e-7ca4-4622-add1-5c4a2fd51c04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Event">
+      <UniqueIdentifier>{0b032227-1dcc-4da7-b231-4b0ae2cd9d34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Image">
+      <UniqueIdentifier>{af9dab49-989c-4016-a756-c0701da78477}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Task">
+      <UniqueIdentifier>{e9d95d59-a2fb-4b57-bcce-0a8641157bf6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\View">
+      <UniqueIdentifier>{2f308894-149b-43f7-b16e-a2489ed1bd8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Window">
+      <UniqueIdentifier>{cc194c83-21f3-4891-a9a0-2b768646342e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\XTask">
+      <UniqueIdentifier>{93201758-5efb-42e0-813d-2041365491ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\XCommand">
+      <UniqueIdentifier>{8c738d61-8445-4eee-8e7f-2698adb42614}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\XWindow">
+      <UniqueIdentifier>{cfc5b620-c2d3-4988-b7b8-bae451effbab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\XEvent">
+      <UniqueIdentifier>{6cc29344-8c0d-4252-98ef-e6297fc8df67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\XEvent\GUICreatorEvent">
+      <UniqueIdentifier>{6d647897-0bd4-422c-be1f-53876d89d4cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\XEvent\MouseEvent">
+      <UniqueIdentifier>{630cd241-55b6-4ee3-b952-ad22f6adaa07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Cube">
+      <UniqueIdentifier>{89bdb415-5db7-4791-834e-0d423b3b3cd4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Application\Application.cpp">
+      <Filter>Quelldateien\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Command\CommandManager.cpp">
+      <Filter>Quelldateien\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Event\EventManager.cpp">
+      <Filter>Quelldateien\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Image\PNGImage.cpp">
+      <Filter>Quelldateien\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Task\TaskManager.cpp">
+      <Filter>Quelldateien\Task</Filter>
+    </ClCompile>
+    <ClCompile Include="Task\Task.cpp">
+      <Filter>Quelldateien\Task</Filter>
+    </ClCompile>
+    <ClCompile Include="Window\GLUTWindow.cpp">
+      <Filter>Quelldateien\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="View\View.cpp">
+      <Filter>Quelldateien\View</Filter>
+    </ClCompile>
+    <ClCompile Include="XEvent\GUICreatorEvent\CreateMainVewEvent.cpp">
+      <Filter>Quelldateien\XEvent\GUICreatorEvent</Filter>
+    </ClCompile>
+    <ClCompile Include="XEvent\MouseEvent\MouseWheelEvent.cpp">
+      <Filter>Quelldateien\XEvent\MouseEvent</Filter>
+    </ClCompile>
+    <ClCompile Include="XEvent\MouseEvent\MouseScrollEvent.cpp">
+      <Filter>Quelldateien\XEvent\MouseEvent</Filter>
+    </ClCompile>
+    <ClCompile Include="XWindow\MainWindow.cpp">
+      <Filter>Quelldateien\XWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Application\Application.h">
+      <Filter>Quelldateien\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\CommandManager.h">
+      <Filter>Quelldateien\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\ICommand.h">
+      <Filter>Quelldateien\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Event\EventManager.h">
+      <Filter>Quelldateien\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Event\IEvent.h">
+      <Filter>Quelldateien\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Image\PNGImage.h">
+      <Filter>Quelldateien\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="Image\IImage.h">
+      <Filter>Quelldateien\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="Task\Task.h">
+      <Filter>Quelldateien\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="Task\TaskManager.h">
+      <Filter>Quelldateien\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="Task\ITask.h">
+      <Filter>Quelldateien\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="View\IView.h">
+      <Filter>Quelldateien\View</Filter>
+    </ClInclude>
+    <ClInclude Include="View\IRenderElement.h">
+      <Filter>Quelldateien\View</Filter>
+    </ClInclude>
+    <ClInclude Include="Window\GLUTWindow.h">
+      <Filter>Quelldateien\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="View\View.h">
+      <Filter>Quelldateien\View</Filter>
+    </ClInclude>
+    <ClInclude Include="XEvent\GUICreatorEvent\CreateMainViewEvent.h">
+      <Filter>Quelldateien\XEvent\GUICreatorEvent</Filter>
+    </ClInclude>
+    <ClInclude Include="XEvent\MouseEvent\MouseWheelEvent.h">
+      <Filter>Quelldateien\XEvent\MouseEvent</Filter>
+    </ClInclude>
+    <ClInclude Include="XEvent\MouseEvent\MouseScrollEvent.h">
+      <Filter>Quelldateien\XEvent\MouseEvent</Filter>
+    </ClInclude>
+    <ClInclude Include="XWindow\MainWindow.h">
+      <Filter>Quelldateien\XWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube\CubeControll.h">
+      <Filter>Quelldateien\Cube</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
