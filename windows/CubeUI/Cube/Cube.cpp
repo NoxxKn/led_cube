@@ -8,8 +8,10 @@ Cube::Cube(void) {
 	cubeConnect(10);
 }
 
-
 Cube::~Cube(void) {
+	clearAll();
+	writeControl();
+
 	if (mHandleSerial != INVALID_HANDLE_VALUE)
 		CloseHandle(mHandleSerial);
 }
@@ -99,51 +101,77 @@ bool Cube::cubeConnect(uint8_t portNum) {
 }
 
 void Cube::clearLed(uint8_t x, uint8_t y, uint8_t z) {
-	mControl.layer_d[z].row[y] &= ~(1 << x);
+	CubeControl con = mControl.load();
+	con.layer_d[z].row[y] &= ~(1 << x);
+	mControl.store(con);
 }
 
 void Cube::clearRowX(uint8_t y, uint8_t z) {
-	mControl.layer_d[z].row[y] &= 0x00;
+	CubeControl con = mControl.load();
+	con.layer_d[z].row[y] &= 0x00;
+	mControl.store(con);
 }
 
 void Cube::clearRowY(uint8_t x, uint8_t z) {
+	CubeControl con = mControl.load();
 	for (uint8_t i = 0; i < 8; i++)
-		mControl.layer_d[z].row[i] &= ~(1 << x);
+		con.layer_d[z].row[i] &= ~(1 << x);
+	mControl.store(con);
 }
 
 void Cube::clearRowZ(uint8_t x, uint8_t y) {
+	CubeControl con = mControl.load();
 	for (uint8_t i = 0; i < 8; i++)
-		mControl.layer_d[i].row[y] &= ~(1 << x);
+		con.layer_d[i].row[y] &= ~(1 << x);
+	mControl.store(con);
 }
 
 void Cube::setLed(uint8_t x, uint8_t y, uint8_t z) {
-	mControl.layer_d[z].row[y] |= (1 << x);
+	CubeControl con = mControl.load();
+	con.layer_d[z].row[y] |= (1 << x);
+	mControl.store(con);
 }
 
 void Cube::setRowX(uint8_t y, uint8_t z) {
-	mControl.layer_d[z].row[y] |= 0xFF;
+	CubeControl con = mControl.load();
+	con.layer_d[z].row[y] |= 0xFF;
+	mControl.store(con);
 }
 
 void Cube::setRowY(uint8_t x, uint8_t z) {
+	CubeControl con = mControl.load();
 	for (uint8_t i = 0; i < 8; i++)
-		mControl.layer_d[z].row[i] |= (1 << x);
+		con.layer_d[z].row[i] |= (1 << x);
+	mControl.store(con);
 }
 
 void Cube::setRowZ(uint8_t x, uint8_t y) {
+	CubeControl con = mControl.load();
 	for (uint8_t i = 0; i < 8; i++)
-		mControl.layer_d[i].row[y] |= (1 << x);
+		con.layer_d[i].row[y] |= (1 << x);
+	mControl.store(con);
 }
 
 void Cube::clearAll() {
-	for (uint8_t i = 0; i < 8; ++i) {
-		mControl.layer_f[i] = 0;
-	}
+	CubeControl con = mControl.load();
+	for (uint8_t i = 0; i < 8; ++i)
+		con.layer_f[i] = 0;
+	mControl.store(con);
 }
 
 void Cube::writeControl() {
-	memcpy(mWRBuff, &mControl, sizeof(CubeControl));
+	CubeControl con = mControl.load();
+	memcpy(mWRBuff, &con, sizeof(CubeControl));
 	WriteFile(mHandleSerial, "SP", 2, &mDWBytesWrite, NULL);
 	WriteFile(mHandleSerial, mWRBuff, CUBE_BUFFER_SIZE, &mDWBytesWrite, NULL);
 	WriteFile(mHandleSerial, "E", 1, &mDWBytesWrite, NULL);
 	Sleep(100);
+}
+
+CubeControl Cube::control() const {
+	return mControl.load();
+}
+
+void Cube::setControl(const CubeControl & con) {
+	mControl.store(con);
 }

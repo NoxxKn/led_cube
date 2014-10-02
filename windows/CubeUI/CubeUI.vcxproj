@@ -76,6 +76,10 @@
     <ClCompile Include="Application\Application.cpp" />
     <ClCompile Include="Command\CommandManager.cpp" />
     <ClCompile Include="Cube\Cube.cpp" />
+    <ClCompile Include="Effect\Effect.cpp" />
+    <ClCompile Include="Effect\HeartEffect.cpp" />
+    <ClCompile Include="Effect\RandomEffect.cpp" />
+    <ClCompile Include="Effect\SinEffect.cpp" />
     <ClCompile Include="Event\EventManager.cpp" />
     <ClCompile Include="Image\PNGImage.cpp" />
     <ClCompile Include="main.cpp" />
@@ -94,6 +98,11 @@
     <ClInclude Include="Command\ICommand.h" />
     <ClInclude Include="Cube\Cube.h" />
     <ClInclude Include="Cube\CubeControl.h" />
+    <ClInclude Include="Effect\Effect.h" />
+    <ClInclude Include="Effect\HeartEffect.h" />
+    <ClInclude Include="Effect\IEffect.h" />
+    <ClInclude Include="Effect\RandomEffect.h" />
+    <ClInclude Include="Effect\SinEffect.h" />
     <ClInclude Include="Event\EventManager.h" />
     <ClInclude Include="Event\IEvent.h" />
     <ClInclude Include="Image\IImage.h" />

@@ -7,11 +7,12 @@
 #include <stdint.h>
 #include <windows.h>
 #include <conio.h>
+#include <atomic>
 #include "CubeControl.h"
 
 class Cube {
 private:
-	CubeControl		mControl;
+	std::atomic<CubeControl> mControl;
 	bool			mConnected;
 	HANDLE			mHandleSerial;
 	DCB				mDCBSerialParams;
@@ -37,6 +38,9 @@ public:
 	void clearRowZ(uint8_t xRow = 0, uint8_t yRow = 0);
 
 	void clearAll();
+
+	CubeControl control() const;
+	void setControl(const CubeControl & con);
 
 	void writeControl();
 };

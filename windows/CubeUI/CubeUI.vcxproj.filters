@@ -51,6 +51,9 @@
     <Filter Include="Quelldateien\Cube">
       <UniqueIdentifier>{89bdb415-5db7-4791-834e-0d423b3b3cd4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Quelldateien\Effect">
+      <UniqueIdentifier>{210f1602-a9eb-428a-9167-f58d701a1027}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application\Application.cpp">
@@ -94,6 +97,18 @@
     </ClCompile>
     <ClCompile Include="Cube\Cube.cpp">
       <Filter>Quelldateien\Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\Effect.cpp">
+      <Filter>Quelldateien\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\RandomEffect.cpp">
+      <Filter>Quelldateien\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\HeartEffect.cpp">
+      <Filter>Quelldateien\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\SinEffect.cpp">
+      <Filter>Quelldateien\Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -156,6 +171,21 @@
     </ClInclude>
     <ClInclude Include="Cube\CubeControl.h">
       <Filter>Quelldateien\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\RandomEffect.h">
+      <Filter>Quelldateien\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\Effect.h">
+      <Filter>Quelldateien\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\IEffect.h">
+      <Filter>Quelldateien\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\HeartEffect.h">
+      <Filter>Quelldateien\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\SinEffect.h">
+      <Filter>Quelldateien\Effect</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

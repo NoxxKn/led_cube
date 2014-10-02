@@ -24,17 +24,31 @@ NX_APPLICATION_POS_X, NX_APPLICATION_POS_Y,
 NX_APPLICATION_CLEAR_R, NX_APPLICATION_CLEAR_G,
 NX_APPLICATION_CLEAR_B, NX_APPLICATION_CLEAR_A,
 "Cube Studio!") {
+	mGoon.store(true);
 	mEventManager = EventManager::getInstance();
 	mTaskManager = TaskManager::getInstance();
 	mCommandManager = CommandManager::getInstance();
 }
 
 Application::~Application() {
+	mGoon.store(false);
+
+	mWriterThread.join();
+	mCommandThread.join();
+
 	delete mEventManager;
 	delete mTaskManager;
 	delete mCommandManager;
 
-	mThread.join();
+	list<IEffect*>::iterator etr;
+	for (etr = mEffects.begin(); etr != mEffects.end(); ++etr)
+		delete *etr;
+	mEffects.clear();
+
+	vector<Cube*>::iterator ctr;
+	for (ctr = mCubes.begin(); ctr != mCubes.end(); ++ctr)
+		delete *ctr;
+	mCubes.clear();
 
 	if (mInstance != NULL)
 		mInstance = NULL;
@@ -56,31 +70,71 @@ CommandManager * Application::commandManager() {
 	return mCommandManager;
 }
 
-Cube & Application::cube() {
-	return mCube;
+void Application::addCube(Cube * cube) {
+	mCubes.push_back(cube);
 }
 
-const Cube & Application::cube() const {
-	return mCube;
+Cube * Application::cube(size_t pos) {
+	return mCubes[pos];
 }
 
-Cube * Application::cubePtr() {
-	return &mCube;
+size_t Application::cubesSize() const {
+	return mCubes.size();
+}
+
+void Application::addEffect(IEffect * ef) {
+	mCubesMutex.lock();
+	mEffects.push_back(ef);
+	mCubesMutex.unlock();
+}
+
+list<IEffect*> Application::copyEffects() {
+	mCubesMutex.lock();
+	list<IEffect*> copyList = mEffects;
+	mCubesMutex.unlock();
+	return copyList;
+}
+
+list<IEffect*> * Application::effects() {
+	return &mEffects;
+}
+
+bool Application::goon() const {
+	return mGoon.load();
+}
+
+void Application::kill() {
+	mGoon.store(false);
+	mCubesMutex.lock();
+	vector<Cube*>::iterator ctr;
+	for (ctr = mCubes.begin(); ctr != mCubes.end(); ++ctr)
+		delete *ctr;
+	mCubes.clear();
+	mCubesMutex.unlock();
+}
+
+mutex * Application::taskMutex() {
+	return &mTaskMutex;
+}
+
+mutex * Application::cubesMutex() {
+	return &mCubesMutex;
 }
 
 void Application::init() {
 	regCommands();
 	mEventManager->add(new CreateMainViewEvent());
-	mThread = thread(cmdThread);
+	mCommandThread = thread(cmdThread);
+	mWriterThread = thread(effThread);
 }
 
 void Application::mainloop(int elapsedTime) {
-	lockMutex();
+	mTaskMutex.lock();
 
 	mEventManager->trigger();
 	mTaskManager->trigger(elapsedTime);
 
-	unlockMutex();
+	mTaskMutex.unlock();
 }
 
 void Application::reset() {
@@ -92,14 +146,6 @@ void Application::reset() {
 	// create new Manager
 	mEventManager = EventManager::getInstance();
 	mTaskManager = TaskManager::getInstance();
-}
-
-void Application::lockMutex() {
-	mMutex.lock();
-}
-
-void Application::unlockMutex() {
-	mMutex.unlock();
 }
 
 void Application::regCommands() {
@@ -132,7 +178,8 @@ list<string> NX::explode(const string& str, const char& ch) {
 }
 
 void NX::cmdThread() {
-	bool go = true;
+	Application * app = Application::getInstance();
+	bool go = app->goon();
 	list<string> l;
 	string s;
 	string cmd;
@@ -144,15 +191,46 @@ void NX::cmdThread() {
 		if (s.size() > 0 && l.size() > 0) {
 			cmd = *l.begin();
 
-			if (cmd.compare("end") == 0)
+			if (cmd.compare("end") == 0) {
 				go = false;
+				app->kill();
+			}
 			else {
 				l.erase(l.begin());
-				Application::getInstance()->lockMutex();
+				app->taskMutex()->lock();
 				CommandManager::getInstance()->setValues(l);
 				CommandManager::getInstance()->cmd(cmd)->exec();
-				Application::getInstance()->unlockMutex();
+				app->taskMutex()->unlock();
 			}
 		}
+		go = app->goon();
+	}
+}
+
+void NX::effThread() {
+	Application * app = Application::getInstance();
+	mutex * mtx = app->cubesMutex();
+	bool go = app->goon();
+
+	while (go) {
+		mtx->lock();
+
+		if (app->cubesSize() > 0) {
+			Cube * cub = app->cube(0);
+
+			list<IEffect*> * effects = app->effects();
+			list<IEffect*>::const_iterator itr;
+			for (itr = effects->begin(); itr != effects->end(); ++itr) {
+				IEffect * effect = *itr;
+				effect->run();
+				CubeControl con = effect->control();
+				cub->setControl(con);
+				cub->writeControl();
+			}
+		}
+
+		mtx->unlock();
+
+		go = app->goon();
 	}
 }
