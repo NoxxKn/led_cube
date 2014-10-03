@@ -28,6 +28,10 @@ namespace NX {
 		void clearRowY(uint8_t xRow = 0, uint8_t zRow = 0);
 		void clearRowZ(uint8_t xRow = 0, uint8_t yRow = 0);
 
+		void setPlaneX(uint8_t x);
+		void setPlaneY(uint8_t y);
+		void setPlaneZ(uint8_t z);
+
 		void clearAll();
 
 		virtual const CubeControl & control() const;

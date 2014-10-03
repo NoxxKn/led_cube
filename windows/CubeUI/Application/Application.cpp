@@ -1,5 +1,5 @@
 #include <string>
-
+#include <algorithm>
 #include "Application.h"
 #include "GL/glut.h"
 #include "../XEvent/GUICreatorEvent/CreateMainViewEvent.h"
@@ -208,6 +208,10 @@ void NX::cmdThread() {
 }
 
 void NX::effThread() {
+	const unsigned int times = 3;
+	const unsigned int effect = 8;
+	const unsigned int number = 4;
+	unsigned int counter = 0;
 	Application * app = Application::getInstance();
 	mutex * mtx = app->cubesMutex();
 	bool go = app->goon();
@@ -219,8 +223,10 @@ void NX::effThread() {
 			Cube * cub = app->cube(0);
 
 			list<IEffect*> * effects = app->effects();
-			list<IEffect*>::const_iterator itr;
-			for (itr = effects->begin(); itr != effects->end(); ++itr) {
+			list<IEffect*>::const_iterator itr = effects->begin();
+			size_t pos = round(counter / (effect * times));
+			if (pos < effects->size()) {
+				advance(itr, pos);
 				IEffect * effect = *itr;
 				effect->run();
 				CubeControl con = effect->control();
@@ -230,7 +236,9 @@ void NX::effThread() {
 		}
 
 		mtx->unlock();
-
+		
+		counter++;
+		counter = counter % (effect * times * number);
 		go = app->goon();
 	}
 }

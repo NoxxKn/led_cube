@@ -110,6 +110,12 @@
     <ClCompile Include="Effect\SinEffect.cpp">
       <Filter>Quelldateien\Effect</Filter>
     </ClCompile>
+    <ClCompile Include="Effect\MatrixEffect.cpp">
+      <Filter>Quelldateien\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\PlaneEffect.cpp">
+      <Filter>Quelldateien\Effect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\Application.h">
@@ -185,6 +191,12 @@
       <Filter>Quelldateien\Effect</Filter>
     </ClInclude>
     <ClInclude Include="Effect\SinEffect.h">
+      <Filter>Quelldateien\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\MatrixEffect.h">
+      <Filter>Quelldateien\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\PlaneEffect.h">
       <Filter>Quelldateien\Effect</Filter>
     </ClInclude>
   </ItemGroup>

@@ -53,6 +53,30 @@ void Effect::setRowZ(uint8_t x, uint8_t y) {
 		mControl.layer_d[i].row[y] |= (1 << x);
 }
 
+void Effect::setPlaneX(uint8_t x) {
+	for (uint8_t y = 0; y < 8; ++y) {
+		for (uint8_t z = 0; z < 8; ++z) {
+			setLed(x, y, z);
+		}
+	}
+}
+
+void Effect::setPlaneY(uint8_t y) {
+	for (uint8_t x = 0; x < 8; ++x) {
+		for (uint8_t z = 0; z < 8; ++z) {
+			setLed(x, y, z);
+		}
+	}
+}
+
+void Effect::setPlaneZ(uint8_t z){
+	for (uint8_t x = 0; x < 8; ++x) {
+		for (uint8_t y = 0; y < 8; ++y) {
+			setLed(x, y, z);
+		}
+	}
+}
+
 void Effect::clearAll() {
 	for (uint8_t i = 0; i < 8; ++i) {
 		mControl.layer_f[i] = 0;

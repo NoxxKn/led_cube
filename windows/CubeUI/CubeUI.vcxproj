@@ -78,6 +78,8 @@
     <ClCompile Include="Cube\Cube.cpp" />
     <ClCompile Include="Effect\Effect.cpp" />
     <ClCompile Include="Effect\HeartEffect.cpp" />
+    <ClCompile Include="Effect\MatrixEffect.cpp" />
+    <ClCompile Include="Effect\PlaneEffect.cpp" />
     <ClCompile Include="Effect\RandomEffect.cpp" />
     <ClCompile Include="Effect\SinEffect.cpp" />
     <ClCompile Include="Event\EventManager.cpp" />
@@ -101,6 +103,8 @@
     <ClInclude Include="Effect\Effect.h" />
     <ClInclude Include="Effect\HeartEffect.h" />
     <ClInclude Include="Effect\IEffect.h" />
+    <ClInclude Include="Effect\MatrixEffect.h" />
+    <ClInclude Include="Effect\PlaneEffect.h" />
     <ClInclude Include="Effect\RandomEffect.h" />
     <ClInclude Include="Effect\SinEffect.h" />
     <ClInclude Include="Event\EventManager.h" />

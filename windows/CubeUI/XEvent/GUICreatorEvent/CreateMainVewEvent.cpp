@@ -3,6 +3,8 @@
 #include "../../Effect/RandomEffect.h"
 #include "../../Effect/HeartEffect.h"
 #include "../../Effect/SinEffect.h"
+#include "../../Effect/MatrixEffect.h"
+#include "../../Effect/PlaneEffect.h"
 #include "CreateMainViewEvent.h"
 
 using namespace std;
@@ -21,5 +23,8 @@ void CreateMainViewEvent::trigger() {
 
 	// create Cube and Effects
 	app->addCube(new Cube());
+	app->addEffect(new RandomEffect());
 	app->addEffect(new SinEffect());
+	app->addEffect(new MatrixEffect());
+	app->addEffect(new PlaneEffect());
 }
