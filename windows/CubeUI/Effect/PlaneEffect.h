@@ -8,8 +8,10 @@ namespace NX {
 	private:
 		size_t mRunner;
 	public:
-		PlaneEffect() {
+		PlaneEffect() : Effect() {
+			mName = "Plane";
 			mRunner = 0;
+			mTimes = 16;
 		}
 
 		virtual ~PlaneEffect() {

@@ -6,7 +6,8 @@ using namespace std;
 using namespace NX;
 
 Effect::Effect() : IEffect() {
-
+	mName = "";
+	mTimes = 0;
 }
 
 Effect::~Effect() {
@@ -51,6 +52,21 @@ void Effect::setRowY(uint8_t x, uint8_t z) {
 void Effect::setRowZ(uint8_t x, uint8_t y) {
 	for (uint8_t i = 0; i < 8; i++)
 		mControl.layer_d[i].row[y] |= (1 << x);
+}
+
+void Effect::setRowX(uint8_t y, uint8_t z, uint8_t beg, uint8_t end) {
+	for (uint8_t i = beg; i < end; ++i)
+		setLed(i, y, z);
+}
+
+void Effect::setRowY(uint8_t x, uint8_t z, uint8_t beg, uint8_t end) {
+	for (uint8_t i = beg; i < end; ++i)
+		setLed(x, i, z);
+}
+
+void Effect::setRowZ(uint8_t x, uint8_t y, uint8_t beg, uint8_t end) {
+	for (uint8_t i = beg; i < end; ++i)
+		setLed(x, y, i);
 }
 
 void Effect::setPlaneX(uint8_t x) {

@@ -13,19 +13,21 @@
 class Cube {
 private:
 	std::atomic<CubeControl> mControl;
+	int				mComNum;
 	bool			mConnected;
 	HANDLE			mHandleSerial;
 	DCB				mDCBSerialParams;
 	char			mWRBuff[CUBE_BUFFER_SIZE + 1];
 	DWORD			mDWBytesWrite;
 
-	bool cubeConnect(uint8_t portNum);
 	void cubeSetLed(uint8_t x, uint8_t y, uint8_t z, bool value, CubeControl * data);
 	uint8_t cubeRain(CubeControl * data);
 
 public:
 	Cube();
 	~Cube();
+
+	bool cubeConnect(int portNum, int baudRate = 19200, int parityBit = 0, int byteSize = 8, int stopBits = 0);
 
 	void setLed(uint8_t xRow = 0, uint8_t yRow = 0, uint8_t zRow = 0);
 	void setRowX(uint8_t yRow = 0, uint8_t zRow = 0);
@@ -43,6 +45,8 @@ public:
 	void setControl(const CubeControl & con);
 
 	void writeControl();
+
+	int comNum() const;
 };
 
 #endif

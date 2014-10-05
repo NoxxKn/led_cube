@@ -3,6 +3,26 @@
 #include "Application.h"
 #include "GL/glut.h"
 #include "../XEvent/GUICreatorEvent/CreateMainViewEvent.h"
+#include "../XCommand/Cube/ConnectCubeCommand.h"
+#include "../XCommand/Cube/DisconnectCubeCommand.h"
+#include "../XCommand/Cube/ShowCubesCommand.h"
+#include "../XCommand/Cube/ClearLEDCommand.h"
+#include "../XCommand/Effect/AddEffectCommand.h"
+#include "../XCommand/Effect/RemoveEffectCommand.h"
+#include "../XCommand/Effect/ShowEffectsCommand.h"
+#include "../XCommand/Effect/ChangeModeCommand.h"
+#include "../XCommand/Custom/AddLayerCustomCommand.h"
+#include "../XCommand/Custom/ChangeCustomCustomCommand.h"
+#include "../XCommand/Custom/ChangeLayerCustomCommand.h"
+#include "../XCommand/Custom/ClearLayerCustomCommand.h"
+#include "../XCommand/Custom/ClearLedCustomCommand.h"
+#include "../XCommand/Custom/ClearRowCustomCommand.h"
+#include "../XCommand/Custom/RemoveLayerCustomCommand.h"
+#include "../XCommand/Custom/SetLedCustomCommand.h"
+#include "../XCommand/Custom/SetPlaneCustomCommand.h"
+#include "../XCommand/Custom/SetRowCustomCommand.h"
+#include "../XCommand/Custom/SetRowLimitCustomCommand.h"
+#include "../Effect/CustomEffect.h"
 
 using namespace std;
 using namespace NX;
@@ -28,6 +48,9 @@ NX_APPLICATION_CLEAR_B, NX_APPLICATION_CLEAR_A,
 	mEventManager = EventManager::getInstance();
 	mTaskManager = TaskManager::getInstance();
 	mCommandManager = CommandManager::getInstance();
+	mPlayMode = PM_EFFECTS;
+	mCustomNum = 0;
+	mLayerNum = 0;
 }
 
 Application::~Application() {
@@ -82,6 +105,28 @@ size_t Application::cubesSize() const {
 	return mCubes.size();
 }
 
+void Application::removeCube(int comNum) {
+	size_t sizeCubes = mCubes.size();
+
+	for (size_t i = 0; i < sizeCubes; ++i) {
+		Cube * cube = mCubes[i];
+		if (cube->comNum() == comNum) {
+			vector<Cube*>::iterator itr = mCubes.begin();
+			advance(itr, i);
+			delete cube;
+			mCubes.erase(itr);
+			cout << "Cube COM Num: " << comNum << " disconnected!" << endl;
+			return;
+		}
+	}
+
+	cout << "No Cube on COM Num: " << comNum << " found!" << endl;
+}
+
+vector<Cube*> * Application::cubes() {
+	return &mCubes;
+}
+
 void Application::addEffect(IEffect * ef) {
 	mCubesMutex.lock();
 	mEffects.push_back(ef);
@@ -121,6 +166,30 @@ mutex * Application::cubesMutex() {
 	return &mCubesMutex;
 }
 
+PlayMode Application::playMode() const {
+	return mPlayMode;
+}
+
+void Application::playMode(PlayMode playMode) {
+	mPlayMode = playMode;
+}
+
+size_t Application::customNum() const {
+	return mCustomNum;
+}
+
+void Application::customNum(size_t num) {
+	mCustomNum = num;
+}
+
+size_t Application::layerNum() const {
+	return mLayerNum;
+}
+
+void Application::layerNum(size_t num) {
+	mLayerNum = num;
+}
+
 void Application::init() {
 	regCommands();
 	mEventManager->add(new CreateMainViewEvent());
@@ -149,7 +218,25 @@ void Application::reset() {
 }
 
 void Application::regCommands() {
-
+	mCommandManager->reg("connectCube", new ConnectCubeCommand());
+	mCommandManager->reg("disconnectCube", new DisconnectCubeCommand());
+	mCommandManager->reg("showCubes", new ShowCubesCommand());
+	mCommandManager->reg("addEffect", new AddEffectCommand());
+	mCommandManager->reg("removeEffect", new RemoveEffectCommand());
+	mCommandManager->reg("showEffects", new ShowEffectsCommand());
+	mCommandManager->reg("clearLED", new ClearLEDCommand());
+	mCommandManager->reg("changeMode", new ChangeModeCommand());
+	mCommandManager->reg("addLayer", new AddLayerCustomCommand());
+	mCommandManager->reg("changeCustom", new ChangeCustomCustomCommand());
+	mCommandManager->reg("changeLayer", new ChangeLayerCustomCommand());
+	mCommandManager->reg("clearLayer", new ClearLayerCustomCommand());
+	mCommandManager->reg("clearLed", new ClearLedCustomCommand());
+	mCommandManager->reg("clearRow", new ClearRowCustomCommand());
+	mCommandManager->reg("removeLayer", new RemoveLayerCustomCommand());
+	mCommandManager->reg("setLed", new SetLedCustomCommand());
+	mCommandManager->reg("setPlane", new SetPlaneCustomCommand());
+	mCommandManager->reg("setRow", new SetRowCustomCommand());
+	mCommandManager->reg("setRowLimit", new SetRowLimitCustomCommand());
 }
 
 list<string> NX::explode(const string& str, const char& ch) {
@@ -198,8 +285,14 @@ void NX::cmdThread() {
 			else {
 				l.erase(l.begin());
 				app->taskMutex()->lock();
-				CommandManager::getInstance()->setValues(l);
-				CommandManager::getInstance()->cmd(cmd)->exec();
+				CommandManager * cman = CommandManager::getInstance();
+				if (cman->isCmd(cmd)) {
+					cman->setValues(l);
+					cman->cmd(cmd)->exec();
+				}
+				else {
+					cout << "Unknown Command" << endl;
+				}
 				app->taskMutex()->unlock();
 			}
 		}
@@ -208,10 +301,10 @@ void NX::cmdThread() {
 }
 
 void NX::effThread() {
-	const unsigned int times = 3;
-	const unsigned int effect = 8;
-	const unsigned int number = 4;
+	unsigned int number = 0;
 	unsigned int counter = 0;
+	size_t posEffects = 0;
+	size_t times = 1;
 	Application * app = Application::getInstance();
 	mutex * mtx = app->cubesMutex();
 	bool go = app->goon();
@@ -219,26 +312,70 @@ void NX::effThread() {
 	while (go) {
 		mtx->lock();
 
-		if (app->cubesSize() > 0) {
+		if (app->cubesSize() > 0 && app->playMode() == PM_EFFECTS) {
 			Cube * cub = app->cube(0);
 
 			list<IEffect*> * effects = app->effects();
 			list<IEffect*>::const_iterator itr = effects->begin();
-			size_t pos = round(counter / (effect * times));
-			if (pos < effects->size()) {
+			size_t pos = posEffects;
+			number = effects->size();
+			if (pos >= number) {
+				pos = 0;
+				posEffects = 0;
+			}
+			if (pos < number) {
 				advance(itr, pos);
 				IEffect * effect = *itr;
-				effect->run();
-				CubeControl con = effect->control();
-				cub->setControl(con);
-				cub->writeControl();
+				if (effect->times() > 0) {
+					effect->run();
+					CubeControl con = effect->control();
+					cub->setControl(con);
+					cub->writeControl();
+
+					times = effect->times();
+					counter = (counter + 1) % times;
+					if (counter == 0)
+						posEffects++;
+				} else
+					posEffects++;
+			}
+		} else if(app->cubesSize() > 0 && app->playMode() == PM_CUSTOM) {
+			Cube * cube = app->cube(0);
+
+			list<IEffect*> * effects = app->effects();
+			list<IEffect*>::const_iterator itr = effects->begin();
+			size_t cusNum = app->customNum();
+			size_t layNum = app->layerNum();
+			IEffect * ef = NULL;
+			IEffect * runner = NULL;
+			size_t ctCount = 0;
+
+			// search for effect
+			for (itr = effects->begin(); itr != effects->end(); ++itr) {
+				runner = *itr;
+				if (runner->type() == ET_CUSTOM) {
+					if (ctCount == cusNum) {
+						ef = runner;
+						break;
+					} else {
+						ctCount++;
+					}
+				}
+			}
+
+			// now ef is still null or there is the right effect in ef
+			if (ef != NULL) {
+				CustomEffect * cus = (CustomEffect*)ef;
+				if (cus->sizeLayers() > layNum) {
+					CubeControl con = cus->control(layNum);
+					cube->setControl(con);
+					cube->writeControl();
+				}
 			}
 		}
 
 		mtx->unlock();
 		
-		counter++;
-		counter = counter % (effect * times * number);
 		go = app->goon();
 	}
 }

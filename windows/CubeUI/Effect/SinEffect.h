@@ -8,8 +8,10 @@ namespace NX {
 	private:
 		int mRunner;
 	public:
-		SinEffect() {
+		SinEffect() : Effect() {
+			mName = "Sin";
 			mRunner = 0;
+			mTimes = 16;
 		}
 
 		virtual ~SinEffect() {

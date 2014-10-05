@@ -15,6 +15,11 @@
 #include "../Command/CommandManager.h"
 
 namespace NX {
+	typedef enum ePlayMode {
+		PM_EFFECTS,
+		PM_CUSTOM
+	} PlayMode;
+
 	class Application {
 	private:
 		// -- Singleton Anti Pattern
@@ -28,6 +33,9 @@ namespace NX {
 		// Writer
 		std::thread mWriterThread;
 		std::mutex mCubesMutex;
+		PlayMode mPlayMode;
+		size_t mCustomNum;
+		size_t mLayerNum;
 
 		// --  Main 
 		// View
@@ -62,6 +70,8 @@ namespace NX {
 		void addCube(Cube * cube);
 		Cube * cube(size_t pos);
 		size_t cubesSize() const;
+		void removeCube(int comNumber);
+		std::vector<Cube*> * cubes();
 
 		void addEffect(IEffect * ef);
 		std::list<IEffect*> copyEffects();
@@ -69,6 +79,15 @@ namespace NX {
 
 		std::mutex * taskMutex();
 		std::mutex * cubesMutex();
+
+		PlayMode playMode() const;
+		void playMode(PlayMode playMode);
+
+		size_t customNum() const;
+		void customNum(size_t num);
+
+		size_t layerNum() const;
+		void layerNum(size_t num);
 
 		bool goon() const;
 		void kill();

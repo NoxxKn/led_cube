@@ -5,6 +5,7 @@
 #include "../../Effect/SinEffect.h"
 #include "../../Effect/MatrixEffect.h"
 #include "../../Effect/PlaneEffect.h"
+#include "../../Effect/LOLEffect.h"
 #include "CreateMainViewEvent.h"
 
 using namespace std;
@@ -21,10 +22,4 @@ void CreateMainViewEvent::trigger() {
     // activate view
     win->changeView(view);
 
-	// create Cube and Effects
-	app->addCube(new Cube());
-	app->addEffect(new RandomEffect());
-	app->addEffect(new SinEffect());
-	app->addEffect(new MatrixEffect());
-	app->addEffect(new PlaneEffect());
 }

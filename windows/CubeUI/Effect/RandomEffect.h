@@ -6,8 +6,9 @@
 namespace NX {
 	class RandomEffect : public Effect {
 	public:
-		RandomEffect() {
-
+		RandomEffect() : Effect() {
+			mName = "Random";
+			mTimes = 16;
 		}
 
 		virtual ~RandomEffect() {

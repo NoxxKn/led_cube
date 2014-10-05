@@ -5,7 +5,7 @@
 using namespace std;
 
 Cube::Cube(void) {
-	cubeConnect(10);
+	cubeConnect(9);
 }
 
 Cube::~Cube(void) {
@@ -42,16 +42,15 @@ uint8_t cubeRain(CubeControl * data)
 	return 0;
 }
 
-bool Cube::cubeConnect(uint8_t portNum) {
-	int size = 0, tmp_port_num = portNum;
+bool Cube::cubeConnect(int portNum, int baudRate, int parityBit, int byteSize, int stopBits) {
 	stringstream ss;
 	string sFile;
-	for (size = 0; tmp_port_num > 0; size++)
-		tmp_port_num /= 10;
 	
 	ss << CUBE_COM_STR;
-	ss << static_cast<int>(portNum);
+	ss << portNum;
 	ss >> sFile;
+
+	mComNum = portNum;
 
 	mHandleSerial = CreateFile(sFile.c_str(),
 		GENERIC_READ | GENERIC_WRITE,
@@ -62,12 +61,17 @@ bool Cube::cubeConnect(uint8_t portNum) {
 		0);
 
 	if (mHandleSerial == INVALID_HANDLE_VALUE) {
-		if (GetLastError() == ERROR_FILE_NOT_FOUND) {
+		DWORD error = GetLastError();
+		if (error == ERROR_FILE_NOT_FOUND) {
 			cout << "Serial Port doesn't exist!" << endl;
 			return FALSE;
 		}
+		else if (error == ERROR_ACCESS_DENIED) {
+			cout << "Access Denied!" << endl;
+			return FALSE;
+		} 
 		else {
-			cout << "Other failure!" << endl;
+			cout << "Error Num:" << error << " Other failure!" << endl;
 			return FALSE;
 		}
 	}
@@ -84,10 +88,10 @@ bool Cube::cubeConnect(uint8_t portNum) {
 	cout << "Stop Bits: " << (int)dcbSerialParams.StopBits << endl;
 	cout << "Parity: " << (int)dcbSerialParams.Parity << endl;
 #endif
-	mDCBSerialParams.BaudRate = CBR_19200;
-	mDCBSerialParams.ByteSize = 8;
-	mDCBSerialParams.StopBits = ONESTOPBIT;
-	mDCBSerialParams.Parity = NOPARITY;
+	mDCBSerialParams.BaudRate = static_cast<DWORD>(baudRate);
+	mDCBSerialParams.ByteSize = static_cast<uint8_t>(byteSize);
+	mDCBSerialParams.StopBits = static_cast<uint8_t>(stopBits);
+	mDCBSerialParams.Parity = static_cast<uint8_t>(parityBit);
 	if (!SetCommState(mHandleSerial, &mDCBSerialParams)){
 		cout << "Error set CommState!" << endl;
 	}
@@ -97,6 +101,7 @@ bool Cube::cubeConnect(uint8_t portNum) {
 	cout << "Stop Bits: " << (int)dcbSerialParams.StopBits << endl;
 	cout << "Parity: " << (int)dcbSerialParams.Parity << endl;
 #endif
+	mConnected = true;
 	return TRUE;
 }
 
@@ -174,4 +179,8 @@ CubeControl Cube::control() const {
 
 void Cube::setControl(const CubeControl & con) {
 	mControl.store(con);
+}
+
+int Cube::comNum() const {
+	return mComNum;
 }

@@ -11,11 +11,13 @@ namespace NX {
 		static double mY[14];
 		static double mZ[14];
 
-		double mRotation;
+		int mRunner;
 
 	public:
-		HeartEffect() {
-			mRotation = 0;
+		HeartEffect() : Effect() {
+			mName = "Heart";
+			mRunner = 0;
+			mTimes = 16;
 		}
 
 		virtual ~HeartEffect() {

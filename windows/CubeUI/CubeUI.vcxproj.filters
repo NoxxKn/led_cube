@@ -54,6 +54,15 @@
     <Filter Include="Quelldateien\Effect">
       <UniqueIdentifier>{210f1602-a9eb-428a-9167-f58d701a1027}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Quelldateien\XCommand\Cube">
+      <UniqueIdentifier>{70ac265a-2470-4eb1-a43e-5a98a4fed1f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\XCommand\Effect">
+      <UniqueIdentifier>{a7ac6bb3-d4bb-41a2-8977-5654570e51c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\XCommand\Custom">
+      <UniqueIdentifier>{69f39fee-c538-45a1-8842-56c0a95a6af0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application\Application.cpp">
@@ -115,6 +124,72 @@
     </ClCompile>
     <ClCompile Include="Effect\PlaneEffect.cpp">
       <Filter>Quelldateien\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\LOLEffect.cpp">
+      <Filter>Quelldateien\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="XCommand\Cube\ConnectCubeCommand.cpp">
+      <Filter>Quelldateien\XCommand\Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="XCommand\Cube\DisconnectCubeCommand.cpp">
+      <Filter>Quelldateien\XCommand\Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="XCommand\Cube\ShowCubesCommand.cpp">
+      <Filter>Quelldateien\XCommand\Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="XCommand\Effect\AddEffectCommand.cpp">
+      <Filter>Quelldateien\XCommand\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="XCommand\Effect\RemoveEffectCommand.cpp">
+      <Filter>Quelldateien\XCommand\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="XCommand\Effect\ShowEffectsCommand.cpp">
+      <Filter>Quelldateien\XCommand\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="XCommand\Cube\ClearLEDCommand.cpp">
+      <Filter>Quelldateien\XCommand\Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\RainEffect.cpp">
+      <Filter>Quelldateien\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\CustomEffect.cpp">
+      <Filter>Quelldateien\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="XCommand\Custom\AddLayerCustomCommand.cpp">
+      <Filter>Quelldateien\XCommand\Custom</Filter>
+    </ClCompile>
+    <ClCompile Include="XCommand\Custom\RemoveLayerCustomCommand.cpp">
+      <Filter>Quelldateien\XCommand\Custom</Filter>
+    </ClCompile>
+    <ClCompile Include="XCommand\Custom\ClearLayerCustomCommand.cpp">
+      <Filter>Quelldateien\XCommand\Custom</Filter>
+    </ClCompile>
+    <ClCompile Include="XCommand\Custom\SetRowCustomCommand.cpp">
+      <Filter>Quelldateien\XCommand\Custom</Filter>
+    </ClCompile>
+    <ClCompile Include="XCommand\Custom\SetPlaneCustomCommand.cpp">
+      <Filter>Quelldateien\XCommand\Custom</Filter>
+    </ClCompile>
+    <ClCompile Include="XCommand\Custom\SetRowLimitCustomCommand.cpp">
+      <Filter>Quelldateien\XCommand\Custom</Filter>
+    </ClCompile>
+    <ClCompile Include="XCommand\Custom\SetLedCustomCommand.cpp">
+      <Filter>Quelldateien\XCommand\Custom</Filter>
+    </ClCompile>
+    <ClCompile Include="XCommand\Custom\ClearLedCustomCommand.cpp">
+      <Filter>Quelldateien\XCommand\Custom</Filter>
+    </ClCompile>
+    <ClCompile Include="XCommand\Custom\ClearRowCustomCommand.cpp">
+      <Filter>Quelldateien\XCommand\Custom</Filter>
+    </ClCompile>
+    <ClCompile Include="XCommand\Custom\ChangeLayerCustomCommand.cpp">
+      <Filter>Quelldateien\XCommand\Custom</Filter>
+    </ClCompile>
+    <ClCompile Include="XCommand\Custom\ChangeCustomCustomCommand.cpp">
+      <Filter>Quelldateien\XCommand\Custom</Filter>
+    </ClCompile>
+    <ClCompile Include="XCommand\Effect\ChangeModeCommand.cpp">
+      <Filter>Quelldateien\XCommand\Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -198,6 +273,72 @@
     </ClInclude>
     <ClInclude Include="Effect\PlaneEffect.h">
       <Filter>Quelldateien\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\LOLEffect.h">
+      <Filter>Quelldateien\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="XCommand\Cube\ConnectCubeCommand.h">
+      <Filter>Quelldateien\XCommand\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="XCommand\Cube\DisconnectCubeCommand.h">
+      <Filter>Quelldateien\XCommand\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="XCommand\Cube\ShowCubesCommand.h">
+      <Filter>Quelldateien\XCommand\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="XCommand\Effect\AddEffectCommand.h">
+      <Filter>Quelldateien\XCommand\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="XCommand\Effect\RemoveEffectCommand.h">
+      <Filter>Quelldateien\XCommand\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="XCommand\Effect\ShowEffectsCommand.h">
+      <Filter>Quelldateien\XCommand\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="XCommand\Cube\ClearLEDCommand.h">
+      <Filter>Quelldateien\XCommand\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\RainEffect.h">
+      <Filter>Quelldateien\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\CustomEffect.h">
+      <Filter>Quelldateien\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="XCommand\Custom\AddLayerCustomCommand.h">
+      <Filter>Quelldateien\XCommand\Custom</Filter>
+    </ClInclude>
+    <ClInclude Include="XCommand\Custom\RemoveLayerCustomCommand.h">
+      <Filter>Quelldateien\XCommand\Custom</Filter>
+    </ClInclude>
+    <ClInclude Include="XCommand\Custom\ClearLayerCustomCommand.h">
+      <Filter>Quelldateien\XCommand\Custom</Filter>
+    </ClInclude>
+    <ClInclude Include="XCommand\Custom\SetRowCustomCommand.h">
+      <Filter>Quelldateien\XCommand\Custom</Filter>
+    </ClInclude>
+    <ClInclude Include="XCommand\Custom\SetPlaneCustomCommand.h">
+      <Filter>Quelldateien\XCommand\Custom</Filter>
+    </ClInclude>
+    <ClInclude Include="XCommand\Custom\SetRowLimitCustomCommand.h">
+      <Filter>Quelldateien\XCommand\Custom</Filter>
+    </ClInclude>
+    <ClInclude Include="XCommand\Custom\SetLedCustomCommand.h">
+      <Filter>Quelldateien\XCommand\Custom</Filter>
+    </ClInclude>
+    <ClInclude Include="XCommand\Custom\ClearLedCustomCommand.h">
+      <Filter>Quelldateien\XCommand\Custom</Filter>
+    </ClInclude>
+    <ClInclude Include="XCommand\Custom\ClearRowCustomCommand.h">
+      <Filter>Quelldateien\XCommand\Custom</Filter>
+    </ClInclude>
+    <ClInclude Include="XCommand\Custom\ChangeLayerCustomCommand.h">
+      <Filter>Quelldateien\XCommand\Custom</Filter>
+    </ClInclude>
+    <ClInclude Include="XCommand\Custom\ChangeCustomCustomCommand.h">
+      <Filter>Quelldateien\XCommand\Custom</Filter>
+    </ClInclude>
+    <ClInclude Include="XCommand\Effect\ChangeModeCommand.h">
+      <Filter>Quelldateien\XCommand\Effect</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
