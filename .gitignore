@@ -20,14 +20,13 @@ Thumbs.db
 *.ilk
 *.log
 [Bb]in
-[Dd]ebug*/
-*.lib
 *.sbr
 obj/
-[Rr]elease*/
 _ReSharper*/
 [Tt]est[Rr]esult*
 *.vssscc
 $tf*/
 *.atsuo
 *.atsln
+*.tlog
+windows/CubeUI/Debug/vc120.idb
