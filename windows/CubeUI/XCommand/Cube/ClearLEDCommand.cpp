@@ -1,6 +1,7 @@
 #include <sstream>
 #include "ClearLEDCommand.h"
 #include "../../Application/Application.h"
+#include "../../XEvent/Cube/ClearLEDEvent.h"
 
 using namespace std;
 using namespace NX;
@@ -19,17 +20,5 @@ void ClearLEDCommand::exec() {
 	ss << *itr;
 	ss >> mCOMNumber;
 
-	mutex * m = app->cubesMutex();
-	m->lock();
-	vector<Cube*> * cubes = app->cubes();
-	size_t cubesSize = cubes->size();
-	for (size_t i = 0; i < cubesSize; ++i) {
-		Cube * cube = cubes->at(i);
-		if (cube->comNum() == mCOMNumber) {
-			cube->clearAll();
-			cube->writeControl();
-			break;
-		}
-	}
-	m->unlock();
+	app->eventManager()->add(new ClearLEDEvent(mCOMNumber));
 }

@@ -2,6 +2,7 @@
 #include "ChangeLayerCustomCommand.h"
 #include "../../Application/Application.h"
 #include "../../Effect/CustomEffect.h"
+#include "../../XEvent/Custom/ChangeLayerCustomEvent.h"
 
 using namespace std;
 using namespace NX;
@@ -24,13 +25,5 @@ void ChangeLayerCustomCommand::exec() {
 	ss << *itr;
 	ss >> newVal;
 
-	// lock mutex
-	mutex * m = app->cubesMutex();
-	m->lock();
-
-	// execute
-	app->layerNum(newVal);
-
-	// unlock mutex
-	m->unlock();
+	app->eventManager()->add(new ChangeLayerCustomEvent(newVal));
 }

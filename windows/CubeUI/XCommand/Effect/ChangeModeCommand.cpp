@@ -1,6 +1,7 @@
 #include <sstream>
 #include "ChangeModeCommand.h"
 #include "../../Application/Application.h"
+#include "../../XEvent/Effect/ChangeModeEvent.h"
 
 using namespace std;
 using namespace NX;
@@ -23,18 +24,5 @@ void ChangeModeCommand::exec() {
 	ss << *itr;
 	ss >> mode;
 
-	// lock mutex
-	mutex * m = app->cubesMutex();
-	m->lock();
-
-	// execute
-	if (mode == "effects")
-		app->playMode(PM_EFFECTS);
-	else if (mode == "custom")
-		app->playMode(PM_CUSTOM);
-	else
-		cout << "Unknown Mode!" << endl;
-
-	// unlock mutex
-	m->unlock();
+	app->eventManager()->add(new ChangeModeEvent(mode));
 }

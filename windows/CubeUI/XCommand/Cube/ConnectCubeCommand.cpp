@@ -1,6 +1,7 @@
 #include <sstream>
 #include "ConnectCubeCommand.h"
 #include "../../Application/Application.h"
+#include "../../XEvent/Cube/ConnectCubeEvent.h"
 
 using namespace std;
 using namespace NX;
@@ -15,23 +16,42 @@ void ConnectCubeCommand::exec() {
 	itr = values.begin();
 
 	stringstream ss;
-
 	ss << *itr;
 	ss >> mCOMNumber;
 
-	Cube * cube = new Cube();
-	bool success = cube->cubeConnect(mCOMNumber);
+	if (values.size() > 1) {
+		ss = stringstream();
+		ss << *(++itr);
+		ss >> mBaudRate;
+	}
+	if (values.size() > 2) {
+		ss = stringstream();
+		ss << *(++itr);
+		ss >> mByteSize;
+	}
+	if (values.size() > 3) {
+		ss = stringstream();
+		ss << *(++itr);
+		ss >> mParityBit;
+	}
+	if (values.size() > 4) {
+		ss = stringstream();
+		ss << *(++itr);
+		ss >> mStopBits;
+	}
 
-	if (success) {
-		mutex * m = app->cubesMutex();
-		m->lock();
-		app->addCube(cube);
-		m->unlock();
-		cout << "COM Success! " << endl;
-		cout << "Connected to COM: " << mCOMNumber << endl;
-	}
-	else {
-		cout << "COM No Success" << endl;
-		delete cube;
-	}
+	IEvent * e = NULL;
+	if (values.size() == 1)
+		e = new ConnectCubeEvent(mCOMNumber);
+	else if (values.size() == 2)
+		e = new ConnectCubeEvent(mCOMNumber, mBaudRate);
+	else if (values.size() == 3)
+		e = new ConnectCubeEvent(mCOMNumber, mBaudRate, mParityBit);
+	else if (values.size() == 4)
+		e = new ConnectCubeEvent(mCOMNumber, mBaudRate, mParityBit, mByteSize);
+	else if (values.size() == 5)
+		e = new ConnectCubeEvent(mCOMNumber, mBaudRate, mParityBit, mByteSize, mStopBits);
+	
+	if (e)
+		app->eventManager()->add(e);
 }

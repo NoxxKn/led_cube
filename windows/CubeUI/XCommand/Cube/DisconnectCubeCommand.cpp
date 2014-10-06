@@ -1,6 +1,7 @@
 #include <sstream>
 #include "DisconnectCubeCommand.h"
 #include "../../Application/Application.h"
+#include "../../XEvent/Cube/DisconnectCubeEvent.h"
 
 using namespace std;
 using namespace NX;
@@ -19,8 +20,5 @@ void DisconnectCubeCommand::exec() {
 	ss << *itr;
 	ss >> mCOMNumber;
 
-	mutex * m = app->cubesMutex();
-	m->lock();
-	app->removeCube(mCOMNumber);
-	m->unlock();
+	app->eventManager()->add(new DisconnectCubeEvent(mCOMNumber));
 }

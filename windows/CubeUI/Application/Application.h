@@ -29,10 +29,12 @@ namespace NX {
 		// -- Threads
 		// Command
 		std::thread mCommandThread;
-		std::mutex mTaskMutex;
+		std::mutex mCommandMutex;
 		// Writer
 		std::thread mWriterThread;
 		std::mutex mCubesMutex;
+
+		// Renderstuff
 		PlayMode mPlayMode;
 		size_t mCustomNum;
 		size_t mLayerNum;
@@ -77,7 +79,7 @@ namespace NX {
 		std::list<IEffect*> copyEffects();
 		std::list<IEffect*> * effects();
 
-		std::mutex * taskMutex();
+		std::mutex * commandMutex();
 		std::mutex * cubesMutex();
 
 		PlayMode playMode() const;

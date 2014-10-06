@@ -2,6 +2,7 @@
 #include "SetPlaneCustomCommand.h"
 #include "../../Application/Application.h"
 #include "../../Effect/CustomEffect.h"
+#include "../../XEvent/Custom/SetPlaneCustomEvent.h"
 
 using namespace std;
 using namespace NX;
@@ -36,34 +37,5 @@ void SetPlaneCustomCommand::exec() {
 	ss << *(++itr);
 	ss >> val;
 
-	// lock mutex
-	mutex * m = app->cubesMutex();
-	m->lock();
-
-	// find custom Command
-	bool found = false;
-	list<IEffect*> * effects = app->effects();
-	list<IEffect*>::iterator etr;
-	CustomEffect * custom = NULL;
-	for (etr = effects->begin(); etr != effects->end(); ++etr) {
-		IEffect * ef = *etr;
-		if (ef->type() == ET_CUSTOM) {
-			CustomEffect * ce = (CustomEffect*)ef;
-			if (customName == ce->name())
-				custom = ce;
-		}
-	}
-
-	// execute
-	if (custom) {
-		if (row == 'x')
-			custom->setPlaneX(layer, val);
-		else if (row == 'y')
-			custom->setPlaneY(layer, val);
-		else if (row == 'z')
-			custom->setPlaneZ(layer, val);
-	}
-
-	// unlock mutex
-	m->unlock();
+	app->eventManager()->add(new SetPlaneCustomEvent(customName, layer, val, row));
 }

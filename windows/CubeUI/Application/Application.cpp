@@ -22,6 +22,8 @@
 #include "../XCommand/Custom/SetPlaneCustomCommand.h"
 #include "../XCommand/Custom/SetRowCustomCommand.h"
 #include "../XCommand/Custom/SetRowLimitCustomCommand.h"
+#include "../XCommand/Custom/LoadCustomCommand.h"
+#include "../XCommand/Custom/SaveCustomCommand.h"
 #include "../Effect/CustomEffect.h"
 
 using namespace std;
@@ -158,8 +160,8 @@ void Application::kill() {
 	mCubesMutex.unlock();
 }
 
-mutex * Application::taskMutex() {
-	return &mTaskMutex;
+mutex * Application::commandMutex() {
+	return &mCommandMutex;
 }
 
 mutex * Application::cubesMutex() {
@@ -198,12 +200,8 @@ void Application::init() {
 }
 
 void Application::mainloop(int elapsedTime) {
-	mTaskMutex.lock();
-
 	mEventManager->trigger();
 	mTaskManager->trigger(elapsedTime);
-
-	mTaskMutex.unlock();
 }
 
 void Application::reset() {
@@ -237,6 +235,8 @@ void Application::regCommands() {
 	mCommandManager->reg("setPlane", new SetPlaneCustomCommand());
 	mCommandManager->reg("setRow", new SetRowCustomCommand());
 	mCommandManager->reg("setRowLimit", new SetRowLimitCustomCommand());
+	mCommandManager->reg("load", new LoadCustomCommand());
+	mCommandManager->reg("save", new SaveCustomCommand());
 }
 
 list<string> NX::explode(const string& str, const char& ch) {
@@ -284,7 +284,7 @@ void NX::cmdThread() {
 			}
 			else {
 				l.erase(l.begin());
-				app->taskMutex()->lock();
+				app->commandMutex()->lock();
 				CommandManager * cman = CommandManager::getInstance();
 				if (cman->isCmd(cmd)) {
 					cman->setValues(l);
@@ -293,10 +293,11 @@ void NX::cmdThread() {
 				else {
 					cout << "Unknown Command" << endl;
 				}
-				app->taskMutex()->unlock();
+				app->commandMutex()->unlock();
 			}
 		}
 		go = app->goon();
+		Sleep(1000);
 	}
 }
 

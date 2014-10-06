@@ -2,6 +2,7 @@
 #include "ClearRowCustomCommand.h"
 #include "../../Application/Application.h"
 #include "../../Effect/CustomEffect.h"
+#include "../../XEvent/Custom/ClearRowCustomEvent.h"
 
 using namespace std;
 using namespace NX;
@@ -39,34 +40,5 @@ void ClearRowCustomCommand::exec() {
 	ss << *(++itr);
 	ss >> val2;
 
-	// lock mutex
-	mutex * m = app->cubesMutex();
-	m->lock();
-
-	// find custom Command
-	bool found = false;
-	list<IEffect*> * effects = app->effects();
-	list<IEffect*>::iterator etr;
-	CustomEffect * custom = NULL;
-	for (etr = effects->begin(); etr != effects->end(); ++etr) {
-		IEffect * ef = *etr;
-		if (ef->type() == ET_CUSTOM) {
-			CustomEffect * ce = (CustomEffect*)ef;
-			if (customName == ce->name())
-				custom = ce;
-		}
-	}
-
-	// execute
-	if (custom) {
-		if (row == 'x')
-			custom->clearRowX(layer, val1, val2);
-		else if (row == 'y')
-			custom->clearRowY(layer, val1, val2);
-		else if (row == 'z')
-			custom->clearRowZ(layer, val1, val2);
-	}
-
-	// unlock mutex
-	m->unlock();
+	app->eventManager()->add(new ClearRowCustomEvent(customName, layer, val1, val2, row));
 }

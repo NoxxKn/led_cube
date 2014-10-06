@@ -2,6 +2,7 @@
 #include "SetRowLimitCustomCommand.h"
 #include "../../Application/Application.h"
 #include "../../Effect/CustomEffect.h"
+#include "../../XEvent/Custom/SetRowLimitCustomEvent.h"
 
 using namespace std;
 using namespace NX;
@@ -45,34 +46,5 @@ void SetRowLimitCustomCommand::exec() {
 	ss << *(++itr);
 	ss >> end;
 
-	// lock mutex
-	mutex * m = app->cubesMutex();
-	m->lock();
-
-	// find custom Command
-	bool found = false;
-	list<IEffect*> * effects = app->effects();
-	list<IEffect*>::iterator etr;
-	CustomEffect * custom = NULL;
-	for (etr = effects->begin(); etr != effects->end(); ++etr) {
-		IEffect * ef = *etr;
-		if (ef->type() == ET_CUSTOM) {
-			CustomEffect * ce = (CustomEffect*)ef;
-			if (customName == ce->name())
-				custom = ce;
-		}
-	}
-
-	// execute
-	if (custom) {
-		if (row == 'x')
-			custom->setRowX(layer, val1, val2, begin, end);
-		else if (row == 'y')
-			custom->setRowY(layer, val1, val2, begin, end);
-		else if (row == 'z')
-			custom->setRowZ(layer, val1, val2, begin, end);
-	}
-
-	// unlock mutex
-	m->unlock();
+	app->eventManager()->add(new SetRowLimitCustomEvent(customName, layer, val1, val2, row, begin, end));
 }

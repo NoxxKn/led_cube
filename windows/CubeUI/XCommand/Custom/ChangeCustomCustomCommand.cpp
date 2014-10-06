@@ -2,6 +2,7 @@
 #include "ChangeCustomCustomCommand.h"
 #include "../../Application/Application.h"
 #include "../../Effect/CustomEffect.h"
+#include "../../XEvent/Custom/ChangeCustomCustomEvent.h"
 
 using namespace std;
 using namespace NX;
@@ -24,13 +25,5 @@ void ChangeCustomCustomCommand::exec() {
 	ss << *itr;
 	ss >> newVal;
 
-	// lock mutex
-	mutex * m = app->cubesMutex();
-	m->lock();
-
-	// execute
-	app->customNum(newVal);
-
-	// unlock mutex
-	m->unlock();
+	app->eventManager()->add(new ChangeCustomCustomEvent(newVal));
 }

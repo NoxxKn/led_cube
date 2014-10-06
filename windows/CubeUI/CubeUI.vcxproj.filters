@@ -63,6 +63,15 @@
     <Filter Include="Quelldateien\XCommand\Custom">
       <UniqueIdentifier>{69f39fee-c538-45a1-8842-56c0a95a6af0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Quelldateien\XEvent\Cube">
+      <UniqueIdentifier>{93d2d8df-23b2-44d0-a958-312563907c7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\XEvent\Custom">
+      <UniqueIdentifier>{400d675e-22a0-41d7-b58b-4dba6f778eca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\XEvent\Effect">
+      <UniqueIdentifier>{a4386356-4c77-44d8-951c-34d3eb1b4f3f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application\Application.cpp">
@@ -190,6 +199,75 @@
     </ClCompile>
     <ClCompile Include="XCommand\Effect\ChangeModeCommand.cpp">
       <Filter>Quelldateien\XCommand\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="XCommand\Custom\LoadCustomCommand.cpp">
+      <Filter>Quelldateien\XCommand\Custom</Filter>
+    </ClCompile>
+    <ClCompile Include="XCommand\Custom\SaveCustomCommand.cpp">
+      <Filter>Quelldateien\XCommand\Custom</Filter>
+    </ClCompile>
+    <ClCompile Include="XEvent\Cube\ClearLEDEvent.cpp">
+      <Filter>Quelldateien\XEvent\Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="XEvent\Cube\ConnectCubeEvent.cpp">
+      <Filter>Quelldateien\XEvent\Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="XEvent\Cube\DisconnectCubeEvent.cpp">
+      <Filter>Quelldateien\XEvent\Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="XEvent\Cube\ShowCubesEvent.cpp">
+      <Filter>Quelldateien\XEvent\Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="XEvent\Custom\AddLayerCustomEvent.cpp">
+      <Filter>Quelldateien\XEvent\Custom</Filter>
+    </ClCompile>
+    <ClCompile Include="XEvent\Custom\ChangeCustomCustomEvent.cpp">
+      <Filter>Quelldateien\XEvent\Custom</Filter>
+    </ClCompile>
+    <ClCompile Include="XEvent\Custom\ChangeLayerCustomEvent.cpp">
+      <Filter>Quelldateien\XEvent\Custom</Filter>
+    </ClCompile>
+    <ClCompile Include="XEvent\Custom\ClearLayerCustomEvent.cpp">
+      <Filter>Quelldateien\XEvent\Custom</Filter>
+    </ClCompile>
+    <ClCompile Include="XEvent\Custom\ClearLedCustomEvent.cpp">
+      <Filter>Quelldateien\XEvent\Custom</Filter>
+    </ClCompile>
+    <ClCompile Include="XEvent\Custom\ClearRowCustomEvent.cpp">
+      <Filter>Quelldateien\XEvent\Custom</Filter>
+    </ClCompile>
+    <ClCompile Include="XEvent\Custom\LoadCustomEvent.cpp">
+      <Filter>Quelldateien\XEvent\Custom</Filter>
+    </ClCompile>
+    <ClCompile Include="XEvent\Custom\RemoveLayerCustomEvent.cpp">
+      <Filter>Quelldateien\XEvent\Custom</Filter>
+    </ClCompile>
+    <ClCompile Include="XEvent\Custom\SaveCustomEvent.cpp">
+      <Filter>Quelldateien\XEvent\Custom</Filter>
+    </ClCompile>
+    <ClCompile Include="XEvent\Custom\SetLedCustomEvent.cpp">
+      <Filter>Quelldateien\XEvent\Custom</Filter>
+    </ClCompile>
+    <ClCompile Include="XEvent\Custom\SetPlaneCustomEvent.cpp">
+      <Filter>Quelldateien\XEvent\Custom</Filter>
+    </ClCompile>
+    <ClCompile Include="XEvent\Custom\SetRowCustomEvent.cpp">
+      <Filter>Quelldateien\XEvent\Custom</Filter>
+    </ClCompile>
+    <ClCompile Include="XEvent\Custom\SetRowLimitCustomEvent.cpp">
+      <Filter>Quelldateien\XEvent\Custom</Filter>
+    </ClCompile>
+    <ClCompile Include="XEvent\Effect\AddEffectEvent.cpp">
+      <Filter>Quelldateien\XEvent\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="XEvent\Effect\ChangeModeEvent.cpp">
+      <Filter>Quelldateien\XEvent\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="XEvent\Effect\RemoveEffectEvent.cpp">
+      <Filter>Quelldateien\XEvent\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="XEvent\Effect\ShowEffectsEvent.cpp">
+      <Filter>Quelldateien\XEvent\Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -339,6 +417,75 @@
     </ClInclude>
     <ClInclude Include="XCommand\Effect\ChangeModeCommand.h">
       <Filter>Quelldateien\XCommand\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="XCommand\Custom\LoadCustomCommand.h">
+      <Filter>Quelldateien\XCommand\Custom</Filter>
+    </ClInclude>
+    <ClInclude Include="XCommand\Custom\SaveCustomCommand.h">
+      <Filter>Quelldateien\XCommand\Custom</Filter>
+    </ClInclude>
+    <ClInclude Include="XEvent\Cube\ClearLEDEvent.h">
+      <Filter>Quelldateien\XEvent\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="XEvent\Cube\ConnectCubeEvent.h">
+      <Filter>Quelldateien\XEvent\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="XEvent\Cube\DisconnectCubeEvent.h">
+      <Filter>Quelldateien\XEvent\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="XEvent\Cube\ShowCubesEvent.h">
+      <Filter>Quelldateien\XEvent\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="XEvent\Custom\AddLayerCustomEvent.h">
+      <Filter>Quelldateien\XEvent\Custom</Filter>
+    </ClInclude>
+    <ClInclude Include="XEvent\Custom\ChangeCustomCustomEvent.h">
+      <Filter>Quelldateien\XEvent\Custom</Filter>
+    </ClInclude>
+    <ClInclude Include="XEvent\Custom\ChangeLayerCustomEvent.h">
+      <Filter>Quelldateien\XEvent\Custom</Filter>
+    </ClInclude>
+    <ClInclude Include="XEvent\Custom\ClearLayerCustomEvent.h">
+      <Filter>Quelldateien\XEvent\Custom</Filter>
+    </ClInclude>
+    <ClInclude Include="XEvent\Custom\ClearLedCustomEvent.h">
+      <Filter>Quelldateien\XEvent\Custom</Filter>
+    </ClInclude>
+    <ClInclude Include="XEvent\Custom\ClearRowCustomEvent.h">
+      <Filter>Quelldateien\XEvent\Custom</Filter>
+    </ClInclude>
+    <ClInclude Include="XEvent\Custom\LoadCustomEvent.h">
+      <Filter>Quelldateien\XEvent\Custom</Filter>
+    </ClInclude>
+    <ClInclude Include="XEvent\Custom\RemoveLayerCustomEvent.h">
+      <Filter>Quelldateien\XEvent\Custom</Filter>
+    </ClInclude>
+    <ClInclude Include="XEvent\Custom\SaveCustomEvent.h">
+      <Filter>Quelldateien\XEvent\Custom</Filter>
+    </ClInclude>
+    <ClInclude Include="XEvent\Custom\SetLedCustomEvent.h">
+      <Filter>Quelldateien\XEvent\Custom</Filter>
+    </ClInclude>
+    <ClInclude Include="XEvent\Custom\SetPlaneCustomEvent.h">
+      <Filter>Quelldateien\XEvent\Custom</Filter>
+    </ClInclude>
+    <ClInclude Include="XEvent\Custom\SetRowCustomEvent.h">
+      <Filter>Quelldateien\XEvent\Custom</Filter>
+    </ClInclude>
+    <ClInclude Include="XEvent\Custom\SetRowLimitCustomEvent.h">
+      <Filter>Quelldateien\XEvent\Custom</Filter>
+    </ClInclude>
+    <ClInclude Include="XEvent\Effect\AddEffectEvent.h">
+      <Filter>Quelldateien\XEvent\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="XEvent\Effect\ChangeModeEvent.h">
+      <Filter>Quelldateien\XEvent\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="XEvent\Effect\RemoveEffectEvent.h">
+      <Filter>Quelldateien\XEvent\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="XEvent\Effect\ShowEffectsEvent.h">
+      <Filter>Quelldateien\XEvent\Effect</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
