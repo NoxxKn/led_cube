@@ -41,7 +41,7 @@ void HeartEffect::run() {
 
 		z += mRunner;
 
-		setLed(x, z, y);
+		setLed(z, x, y);
 	}
 
 	mRunner = (mRunner + 1) % 8;

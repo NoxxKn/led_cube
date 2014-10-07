@@ -13,6 +13,9 @@ void ClearLEDCommand::exec() {
 	list<string> values = cman->getLoadValues();
 	list<string>::iterator itr;
 
+	if (values.size() != 1)
+		return;
+
 	itr = values.begin();
 
 	stringstream ss;
