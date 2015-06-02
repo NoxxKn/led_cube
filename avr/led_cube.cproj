@@ -42,7 +42,7 @@
       <ToolOptions>
         <InterfaceProperties>
           <JtagEnableExtResetOnStartSession>false</JtagEnableExtResetOnStartSession>
-          <IspClock>477770</IspClock>
+          <IspClock>461710</IspClock>
         </InterfaceProperties>
         <InterfaceName>ISP</InterfaceName>
       </ToolOptions>
@@ -65,6 +65,16 @@
       <ToolName>Simulator</ToolName>
     </com_atmel_avrdbg_tool_simulator>
     <preserveEEPROM>False</preserveEEPROM>
+    <com_atmel_avrdbg_tool_ispmk2>
+      <ToolOptions>
+        <InterfaceProperties>
+        </InterfaceProperties>
+        <InterfaceName>ISP</InterfaceName>
+      </ToolOptions>
+      <ToolType>com.atmel.avrdbg.tool.ispmk2</ToolType>
+      <ToolNumber>000200193310</ToolNumber>
+      <ToolName>AVRISP mkII</ToolName>
+    </com_atmel_avrdbg_tool_ispmk2>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <ToolchainSettings>
@@ -131,7 +141,13 @@
     <Compile Include="include\animation.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="include\ascii.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\animaiton.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ascci.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\led_cube.c">

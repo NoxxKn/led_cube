@@ -29,16 +29,16 @@ uint8_t btm222_init()
     btm222state = eeprom_read_byte (&eebtm222state);
     _delay_ms(1);
     if (btm222state == 0) {
-        btm222_uart_init(UART_BAUD_SELECT(19200,F_CPU));
+        btm222_uart_init(UART_BAUD_SELECT(115200,F_CPU));
         btm222_uart_puts(BTM_DEFAULT_CMD);
         _delay_ms(100);
         btm222_uart_puts(BTM_STRING(BTM_ECHO_CMD, BTM_NONE_ECHO));
         _delay_ms(20);
         btm222_uart_puts(BTM_STRING(BTM_FLOW_CTRL_CMD, BTM_FLOW_CTRL_DIS));
         _delay_ms(20);
-        btm222_uart_puts(BTM_STRING(BTM_BAUD_CMD, BTM_BAUD_115200));
+        btm222_uart_puts(BTM_STRING(BTM_BAUD_CMD, BTM_BAUD_19200));
         _delay_ms(20);
-        btm222_uart_init(UART_BAUD_SELECT(115200,F_CPU));
+        btm222_uart_init(UART_BAUD_SELECT(19200,F_CPU));
         _delay_ms(20);
         btm222_uart_puts(BTM_STRING(BTM_BT_NAME_CMD, BTM_BT_NAME));
         _delay_ms(20);
@@ -48,7 +48,7 @@ uint8_t btm222_init()
         eeprom_update_byte(&eebtm222state, btm222state);
     }
     else {
-        btm222_uart_init(UART_BAUD_SELECT(115200,F_CPU));
+        btm222_uart_init(UART_BAUD_SELECT(19200,F_CPU));
     }
     return BTM_ERRNO_INIT_DONE;
 }

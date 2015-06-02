@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{E8F127CC-8D4A-44CB-965C-F33EE13F4F5E}</ProjectGuid>
+    <RootNamespace>CubeUI</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ExecutablePath>$(SolutionDir)Libs\GLnx\bin\32;$(VC_ExecutablePath_x86);$(WindowsSDK_ExecutablePath);$(VS_ExecutablePath);$(MSBuild_ExecutablePath);$(SystemRoot)\SysWow64;$(FxCopDir);$(PATH);</ExecutablePath>
+    <IncludePath>$(SolutionDir)Libs\GLnx\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>$(SolutionDir)Libs\GLnx\lib\debug-32;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ExecutablePath>$(SolutionDir)Libs\GLnx\bin\32;$(VC_ExecutablePath_x86);$(WindowsSDK_ExecutablePath);$(VS_ExecutablePath);$(MSBuild_ExecutablePath);$(SystemRoot)\SysWow64;$(FxCopDir);$(PATH);</ExecutablePath>
+    <IncludePath>$(SolutionDir)Libs\GLnx\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>$(SolutionDir)Libs\GLnx\lib\release-32;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Application\Application.cpp" />
+    <ClCompile Include="Command\CommandManager.cpp" />
+    <ClCompile Include="Cube\Cube.cpp" />
+    <ClCompile Include="Effect\CustomEffect.cpp" />
+    <ClCompile Include="Effect\Effect.cpp" />
+    <ClCompile Include="Effect\HeartEffect.cpp" />
+    <ClCompile Include="Effect\LOLEffect.cpp" />
+    <ClCompile Include="Effect\MatrixEffect.cpp" />
+    <ClCompile Include="Effect\PlaneEffect.cpp" />
+    <ClCompile Include="Effect\RainEffect.cpp" />
+    <ClCompile Include="Effect\RandomEffect.cpp" />
+    <ClCompile Include="Effect\SinEffect.cpp" />
+    <ClCompile Include="Event\EventManager.cpp" />
+    <ClCompile Include="Image\PNGImage.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Task\Task.cpp" />
+    <ClCompile Include="Task\TaskManager.cpp" />
+    <ClCompile Include="View\View.cpp" />
+    <ClCompile Include="Window\GLUTWindow.cpp" />
+    <ClCompile Include="XCommand\Cube\ClearLEDCommand.cpp" />
+    <ClCompile Include="XCommand\Cube\ConnectCubeCommand.cpp" />
+    <ClCompile Include="XCommand\Cube\DisconnectCubeCommand.cpp" />
+    <ClCompile Include="XCommand\Cube\ShowCubesCommand.cpp" />
+    <ClCompile Include="XCommand\Custom\AddLayerCustomCommand.cpp" />
+    <ClCompile Include="XCommand\Custom\ChangeCustomCustomCommand.cpp" />
+    <ClCompile Include="XCommand\Custom\ChangeLayerCustomCommand.cpp" />
+    <ClCompile Include="XCommand\Custom\ClearLayerCustomCommand.cpp" />
+    <ClCompile Include="XCommand\Custom\ClearLedCustomCommand.cpp" />
+    <ClCompile Include="XCommand\Custom\ClearRowCustomCommand.cpp" />
+    <ClCompile Include="XCommand\Custom\LoadCustomCommand.cpp" />
+    <ClCompile Include="XCommand\Custom\RemoveLayerCustomCommand.cpp" />
+    <ClCompile Include="XCommand\Custom\SaveCustomCommand.cpp" />
+    <ClCompile Include="XCommand\Custom\SetLedCustomCommand.cpp" />
+    <ClCompile Include="XCommand\Custom\SetPlaneCustomCommand.cpp" />
+    <ClCompile Include="XCommand\Custom\SetRowCustomCommand.cpp" />
+    <ClCompile Include="XCommand\Custom\SetRowLimitCustomCommand.cpp" />
+    <ClCompile Include="XCommand\Effect\AddEffectCommand.cpp" />
+    <ClCompile Include="XCommand\Effect\ChangeModeCommand.cpp" />
+    <ClCompile Include="XCommand\Effect\RemoveEffectCommand.cpp" />
+    <ClCompile Include="XCommand\Effect\ShowEffectsCommand.cpp" />
+    <ClCompile Include="XEvent\Cube\ClearLEDEvent.cpp" />
+    <ClCompile Include="XEvent\Cube\ConnectCubeEvent.cpp" />
+    <ClCompile Include="XEvent\Cube\DisconnectCubeEvent.cpp" />
+    <ClCompile Include="XEvent\Cube\ShowCubesEvent.cpp" />
+    <ClCompile Include="XEvent\Custom\AddLayerCustomEvent.cpp" />
+    <ClCompile Include="XEvent\Custom\ChangeCustomCustomEvent.cpp" />
+    <ClCompile Include="XEvent\Custom\ChangeLayerCustomEvent.cpp" />
+    <ClCompile Include="XEvent\Custom\ClearLayerCustomEvent.cpp" />
+    <ClCompile Include="XEvent\Custom\ClearLedCustomEvent.cpp" />
+    <ClCompile Include="XEvent\Custom\ClearRowCustomEvent.cpp" />
+    <ClCompile Include="XEvent\Custom\LoadCustomEvent.cpp" />
+    <ClCompile Include="XEvent\Custom\RemoveLayerCustomEvent.cpp" />
+    <ClCompile Include="XEvent\Custom\SaveCustomEvent.cpp" />
+    <ClCompile Include="XEvent\Custom\SetLedCustomEvent.cpp" />
+    <ClCompile Include="XEvent\Custom\SetPlaneCustomEvent.cpp" />
+    <ClCompile Include="XEvent\Custom\SetRowCustomEvent.cpp" />
+    <ClCompile Include="XEvent\Custom\SetRowLimitCustomEvent.cpp" />
+    <ClCompile Include="XEvent\Effect\AddEffectEvent.cpp" />
+    <ClCompile Include="XEvent\Effect\ChangeModeEvent.cpp" />
+    <ClCompile Include="XEvent\Effect\RemoveEffectEvent.cpp" />
+    <ClCompile Include="XEvent\Effect\ShowEffectsEvent.cpp" />
+    <ClCompile Include="XEvent\GUICreatorEvent\CreateMainVewEvent.cpp" />
+    <ClCompile Include="XEvent\MouseEvent\MouseScrollEvent.cpp" />
+    <ClCompile Include="XEvent\MouseEvent\MouseWheelEvent.cpp" />
+    <ClCompile Include="XWindow\MainWindow.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Application\Application.h" />
+    <ClInclude Include="Command\CommandManager.h" />
+    <ClInclude Include="Command\ICommand.h" />
+    <ClInclude Include="Cube\Cube.h" />
+    <ClInclude Include="Cube\CubeControl.h" />
+    <ClInclude Include="Effect\CustomEffect.h" />
+    <ClInclude Include="Effect\Effect.h" />
+    <ClInclude Include="Effect\HeartEffect.h" />
+    <ClInclude Include="Effect\IEffect.h" />
+    <ClInclude Include="Effect\LOLEffect.h" />
+    <ClInclude Include="Effect\MatrixEffect.h" />
+    <ClInclude Include="Effect\PlaneEffect.h" />
+    <ClInclude Include="Effect\RainEffect.h" />
+    <ClInclude Include="Effect\RandomEffect.h" />
+    <ClInclude Include="Effect\SinEffect.h" />
+    <ClInclude Include="Event\EventManager.h" />
+    <ClInclude Include="Event\IEvent.h" />
+    <ClInclude Include="Image\IImage.h" />
+    <ClInclude Include="Image\PNGImage.h" />
+    <ClInclude Include="Task\ITask.h" />
+    <ClInclude Include="Task\Task.h" />
+    <ClInclude Include="Task\TaskManager.h" />
+    <ClInclude Include="View\IRenderElement.h" />
+    <ClInclude Include="View\IView.h" />
+    <ClInclude Include="View\View.h" />
+    <ClInclude Include="Window\GLUTWindow.h" />
+    <ClInclude Include="XCommand\Cube\ClearLEDCommand.h" />
+    <ClInclude Include="XCommand\Cube\ConnectCubeCommand.h" />
+    <ClInclude Include="XCommand\Cube\DisconnectCubeCommand.h" />
+    <ClInclude Include="XCommand\Cube\ShowCubesCommand.h" />
+    <ClInclude Include="XCommand\Custom\AddLayerCustomCommand.h" />
+    <ClInclude Include="XCommand\Custom\ChangeCustomCustomCommand.h" />
+    <ClInclude Include="XCommand\Custom\ChangeLayerCustomCommand.h" />
+    <ClInclude Include="XCommand\Custom\ClearLayerCustomCommand.h" />
+    <ClInclude Include="XCommand\Custom\ClearLedCustomCommand.h" />
+    <ClInclude Include="XCommand\Custom\ClearRowCustomCommand.h" />
+    <ClInclude Include="XCommand\Custom\LoadCustomCommand.h" />
+    <ClInclude Include="XCommand\Custom\RemoveLayerCustomCommand.h" />
+    <ClInclude Include="XCommand\Custom\SaveCustomCommand.h" />
+    <ClInclude Include="XCommand\Custom\SetLedCustomCommand.h" />
+    <ClInclude Include="XCommand\Custom\SetPlaneCustomCommand.h" />
+    <ClInclude Include="XCommand\Custom\SetRowCustomCommand.h" />
+    <ClInclude Include="XCommand\Custom\SetRowLimitCustomCommand.h" />
+    <ClInclude Include="XCommand\Effect\AddEffectCommand.h" />
+    <ClInclude Include="XCommand\Effect\ChangeModeCommand.h" />
+    <ClInclude Include="XCommand\Effect\RemoveEffectCommand.h" />
+    <ClInclude Include="XCommand\Effect\ShowEffectsCommand.h" />
+    <ClInclude Include="XEvent\Cube\ClearLEDEvent.h" />
+    <ClInclude Include="XEvent\Cube\ConnectCubeEvent.h" />
+    <ClInclude Include="XEvent\Cube\DisconnectCubeEvent.h" />
+    <ClInclude Include="XEvent\Cube\ShowCubesEvent.h" />
+    <ClInclude Include="XEvent\Custom\AddLayerCustomEvent.h" />
+    <ClInclude Include="XEvent\Custom\ChangeCustomCustomEvent.h" />
+    <ClInclude Include="XEvent\Custom\ChangeLayerCustomEvent.h" />
+    <ClInclude Include="XEvent\Custom\ClearLayerCustomEvent.h" />
+    <ClInclude Include="XEvent\Custom\ClearLedCustomEvent.h" />
+    <ClInclude Include="XEvent\Custom\ClearRowCustomEvent.h" />
+    <ClInclude Include="XEvent\Custom\LoadCustomEvent.h" />
+    <ClInclude Include="XEvent\Custom\RemoveLayerCustomEvent.h" />
+    <ClInclude Include="XEvent\Custom\SaveCustomEvent.h" />
+    <ClInclude Include="XEvent\Custom\SetLedCustomEvent.h" />
+    <ClInclude Include="XEvent\Custom\SetPlaneCustomEvent.h" />
+    <ClInclude Include="XEvent\Custom\SetRowCustomEvent.h" />
+    <ClInclude Include="XEvent\Custom\SetRowLimitCustomEvent.h" />
+    <ClInclude Include="XEvent\Effect\AddEffectEvent.h" />
+    <ClInclude Include="XEvent\Effect\ChangeModeEvent.h" />
+    <ClInclude Include="XEvent\Effect\RemoveEffectEvent.h" />
+    <ClInclude Include="XEvent\Effect\ShowEffectsEvent.h" />
+    <ClInclude Include="XEvent\GUICreatorEvent\CreateMainViewEvent.h" />
+    <ClInclude Include="XEvent\MouseEvent\MouseScrollEvent.h" />
+    <ClInclude Include="XEvent\MouseEvent\MouseWheelEvent.h" />
+    <ClInclude Include="XWindow\MainWindow.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -15,16 +15,16 @@
 #include <avr/pgmspace.h>
 #include <include/animation.h>
 #define UART1_BAUD_RATE      19200
-#define UART_BAUD_RATE     115200
+#define UART_BAUD_RATE     19200
 
 volatile uint8_t timer2_count = 0;
+static cube cube_data = {{0}};
+
+void matlab_fsm(char c, cube *data);
 
 int main(void)
 {
     uint16_t c = 0, c1 = 0;
-    uint8_t animation_prog = 0;
-    static uint8_t animation_tmp = 0, animation_count = 0;
-    static cube animation_data = {{0}};
 
     TCCR0A = (1 << COM0B1) | (1 << WGM00);
     TCCR0B = (1 << CS02);
@@ -38,33 +38,25 @@ int main(void)
     sei();
     btm222_init();
     uart1_init( UART_BAUD_SELECT(UART1_BAUD_RATE,F_CPU) );
-	
+
     tlc_init();
-		
-    uart1_puts("Hallo UART\n");
+    uart_puts("Hallo UART\n");
     while(1)
     {
-        tlc_put(&animation_data);
-        if (timer2_count >= 40) {
-            timer2_count = 0;
-			if (animation_prog < animation_counts) {
-				animation_prog += animation_func[animation_prog](&animation_data, &animation_count, &animation_tmp, 0); 
-			}
-			else {
-				animation_prog = 0;
-                timer2_count = 40;
-			}
-        }
-        c = uart_getc();
-        if (!(c & UART_NO_DATA)) {
+        //cube_play_animation(&cube_data);
+        tlc_put(&cube_data);
+        //c = uart_getc();
+        /*if (!(c & UART_NO_DATA)) {
             //OCR2A = c;
             btm222_conneciton(c);
             uart1_putc(c);
-        }
-        c1 = uart1_getc();
-        if (!(c1 & UART_NO_DATA)) {
+        }*/
+        c1 = uart_getc();
+        if ( !(c1 & UART_NO_DATA) )
+        {
             //OCR0B = c1;
-            uart_putc(c1);
+            //uart_putc(c1);
+            matlab_fsm(c1, &cube_data);
         }
     }
 }
@@ -78,3 +70,56 @@ ISR (TIMER2_COMPA_vect)
 //Overflows 40
 //for 33ms or 30fps
 //for 10ms Overflow 12
+
+void matlab_fsm(char c, cube *data)
+{
+    //TODO split mode FSM and receive FSM!!!!!
+    static char state = 0;
+    static unsigned char income = 0;
+    static char buffer[64];
+    switch (state) {
+        case 0:
+        if ((char)c == 'S') {
+			uart_putc('0');
+            state++;
+        }
+        else {
+            goto init_fault;
+        }
+        break;
+        case 1:
+        if((char)c == 'P') {
+            uart_putc('1');
+            state++;
+        }
+        else {
+            goto init_fault;
+        }
+        break;
+        case 2:
+        buffer[income++] = (char)c;
+        //TODO add time out
+        if(income == 64) {
+            income = 0;
+            state++;
+        }
+        break;
+        case 3:
+        if((char)c  != 'E') {
+            state = 0;
+            uart_putc('E');
+        }
+        else {
+            uint8_t row, colum;
+            state = 0;
+            memcpy(data, buffer, sizeof(cube));
+            uart_putc('2');
+        }
+        break;
+        default:
+        init_fault:
+        uart_putc('F');
+        state = 0;
+        break;
+    }
+}
